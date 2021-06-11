@@ -1,18 +1,21 @@
 sudo: required
 services:
-  - postgresql
-  - redis-server
+- postgresql
+- redis-server
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 language: python
 python:
-  - "3.5"
+- '3.5'
 install:
-  - pip install -r requirements.txt
-  - pip install pycodestyle
-  - pip install coverage
+- pip install -r requirements.txt
+- pip install pycodestyle
+- pip install coverage
 before_script:
-  - psql --version
-  - psql -U postgres -c 'SELECT version();'
+- psql --version
+- psql -U postgres -c 'SELECT version();'
+- bash test_mypy.sh
+before_install:
+- openssl aes-256-cbc -K $MY_KEY -iv $MY_IV -in root_key.enc -out root_key -d
 script:
-  - ./scripts/cibuild.sh
+- echo "SCRIPT SECTION"
